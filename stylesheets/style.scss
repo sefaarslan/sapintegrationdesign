@@ -114,7 +114,7 @@ img:not([src]):not([srcset]) {
         display: flex;
         flex: 1;
         justify-content: flex-end;
-        
+
         &-inner {
             line-height: 40px;
             margin-right: 5px;
@@ -131,7 +131,7 @@ img:not([src]):not([srcset]) {
             a:active {
                 letter-spacing: 1px;
             }
-            
+
             a::after,
             a::before {
                 backface-visibility: hidden;
@@ -144,7 +144,7 @@ img:not([src]):not([srcset]) {
                 transition: all 280ms ease-in-out;
                 width: 0;
             }
-            
+
             a:hover::after,
             a:hover::before {
                 backface-visibility: hidden;
@@ -152,7 +152,7 @@ img:not([src]):not([srcset]) {
                 transition: width 350ms ease-in-out;
                 width: 80%;
             }
-            
+
             a:hover::before {
                 bottom: auto;
                 top: 0;
@@ -265,10 +265,10 @@ img:not([src]):not([srcset]) {
 .main {
     position: relative;
     margin-bottom: 150px;
-    
+
     .inner {
         padding-right: 300px;
-        
+
         .inner-main {
             position: relative;
             width: 100%;
@@ -334,7 +334,7 @@ img:not([src]):not([srcset]) {
             padding: 0 20px 15px;
             background: var(--color-white-light);
             overflow-y: scroll;
-            
+
             &-item {
                 display: block;
                 padding: 10px 0;
@@ -621,7 +621,7 @@ img:not([src]):not([srcset]) {
             justify-content: flex-end;
             padding: 20px 0 0;
             // font-family: 'Oswald', sans-serif;
-            
+
             .article-more-info {
                 display: flex;
 
@@ -671,7 +671,7 @@ img:not([src]):not([srcset]) {
             }
         }
 
-        // Video 
+        // Video
         .article-video {
             margin-bottom: 20px;
             border-radius: 5px;
@@ -741,7 +741,7 @@ img:not([src]):not([srcset]) {
 
         .article-gallery {
             z-index: 0 !important;
-            
+
             img {
                 width: 100%;
                 cursor: pointer;
@@ -753,7 +753,7 @@ img:not([src]):not([srcset]) {
             }
         }
 
-        // Video 
+        // Video
         .article-video {
             border-radius: 5px;
             overflow: hidden;
@@ -827,7 +827,7 @@ img:not([src]):not([srcset]) {
                     }
                 }
             }
-            
+
             .article-busuanzi,
             .article-counter {
                 align-items: center;
