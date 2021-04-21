@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Tag | sefa3 | sapintegrationdesign.com</title>
+    <title>Configuring User Defined Message Search in SAP CPI | SapIntegrationDesign</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     
@@ -26,7 +26,7 @@
 
 
     <script>
-        window.isPost = false
+        window.isPost = true
         window.aomori = {
             
             
@@ -52,7 +52,7 @@
             <div class="header-type-inner">
                 
                     <div id="typed-strings" style="display:none">
-                        <p>sapintegrationdesign.com</p>
+                        <p>SapIntegrationDesign</p>
                     </div>
                     <a class="header-type-title" id="typed" href="/sapintegrationdesign"></a>
                 
@@ -113,36 +113,125 @@
         <div class="main">
             <section class="inner">
                 <section class="inner-main">
-                    
+                    <div class="post">
+    <article id="post-cknro2osy00023tll0nt4gqtt" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+
+        
+
+        
+        <header class="article-header">
+            
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/sapintegrationdesign/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/sapintegrationdesign/2021/04/18/hello-world/">Hello World</a>
+    <h1 class="article-title" itemprop="name">
+      Configuring User Defined Message Search in SAP CPI
     </h1>
   
 
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2021-04-21T15:46:16.000Z" itemprop="datePublished">2021-04-21</time>
+</div>
+
+            
+
+            
+      1.1kviews.
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <p>Generally, it is not easy to uniquely identify a message required for further analysis when there are many messages in the system. The CPI does not have a function such as User Defined Message Search (UDMS) in PI.<br>With the help of two standard headers, this feature can be enabled in Integration Flows to define a message based on a unique or key field from the message content.<br>We may use the Application Message ID and Application MessageType for our purposes. This is achieved by filling the message header ‘SAP_ApplicationID’ and ‘SAP_MessageType’ with an appropriate value.It is on the developer to think what is the appropriate value to place in the Application Message ID. This may be a unique value sent by the sending system, or possibly a filename in case of file-based integration.<br>How to configure these parameters<br>These headers can be populated using the Content Modifier step.<br>SAP_ApplicationID: Populate the key field from the XPath, camel expression or any supported header types in the content modifier.<br>SAP_MessageType: Configure the name of the key field you are capturing in SAP_Application ID.<br>For example;<br>Ex: National Id : 12312132312<br>SAP_ApplicationID: //nationalId<br>SAP_MessageType: National Id</p>
+<p>The screenshot below shows how to search a message by national Id.</p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+  
+    <a href="/sapintegrationdesign/2021/04/21/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">Adding Filter Parameters to Request URL using Groovy Script in SAP CPI</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">SHARE</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=Configuring User Defined Message Search in SAP CPI - SapIntegrationDesign&url=https://sefaarslan.github.io/sapintegrationdesign/2021/04/21/Configuring-User-Defined-Message-Search-in-SAP-CPI/">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=Configuring User Defined Message Search in SAP CPI - SapIntegrationDesign&u=https://sefaarslan.github.io/sapintegrationdesign/2021/04/21/Configuring-User-Defined-Message-Search-in-SAP-CPI/">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=Configuring User Defined Message Search in SAP CPI - SapIntegrationDesign&url=https://sefaarslan.github.io/sapintegrationdesign/2021/04/21/Configuring-User-Defined-Message-Search-in-SAP-CPI/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
 </article>
-  
-  
-    </div></section>
-  
+This post's Visitor Counts is
+   0
+   views.
+
+   <!-- hexo's local server only -->
+
+
+<section class="comments comments-disqus">
+    <div id="disqus_thread"></div>
+    <script>
+        ;(function () {
+            // DON'T EDIT BELOW THIS LINE
+            var d = document,
+                s = d.createElement('script')
+            s.src =
+                'https://https-sefaarslan-github-io-sapintegrationdesign.disqus.com/embed.js'
+            s.setAttribute('data-timestamp', +new Date())
+            ;(d.head || d.body).appendChild(s)
+        })()
+    </script>
+</section>
 
 
 
 
+
+
+
+
+
+
+
+
+</div>
                 </section>
             </section>
 
@@ -165,6 +254,12 @@
 <div class="widget" id="widget">
     
       
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
     
       
 
@@ -173,7 +268,7 @@
   <div class="widget-wrap widget-tags">
     <div class="widget-title"><span>Tags</span></div>
     <div class="widget-inner">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/sefa3/" rel="tag">sefa3</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/diary/" rel="tag">diary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/program/" rel="tag">program</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/web/" rel="tag">web</a></li></ul>
     </div>
   </div>
 
@@ -184,6 +279,14 @@
     <div class="widget-title"><span>Recent Posts</span></div>
     <div class="widget-inner">
       <ul>
+        
+          <li>
+            <a href="/sapintegrationdesign/2021/04/21/Configuring-User-Defined-Message-Search-in-SAP-CPI/">Configuring User Defined Message Search in SAP CPI</a>
+          </li>
+        
+          <li>
+            <a href="/sapintegrationdesign/2021/04/21/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI/">Adding Filter Parameters to Request URL using Groovy Script in SAP CPI</a>
+          </li>
         
           <li>
             <a href="/sapintegrationdesign/2021/04/18/hello-world/">Hello World</a>
@@ -218,7 +321,7 @@
 
     <div class="footer-wrap">
         <div class="footer-inner"> 
-            sapintegrationdesign.com &copy; 2021<br>
+            SapIntegrationDesign &copy; 2021<br>
             Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
         </div>
     </div>
