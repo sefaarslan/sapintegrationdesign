@@ -15,7 +15,7 @@
 
     <meta charset="utf-8">
     
-    <title>Adding Filter Parameters to Request URL using Groovy Script in SAP CPI | SapIntegrationDesign</title>
+    <title>Adding Filter Parameters to Request URL using Groovy Script in SAP CPI | SAPIntegrationDesign</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     
@@ -69,7 +69,7 @@
             <div class="header-type-inner">
                 
                     <div id="typed-strings" style="display:none">
-                        <p>SapIntegrationDesign</p>
+                        <p>SAPIntegrationDesign</p>
                     </div>
                     <a class="header-type-title" id="typed" href="/sapintegrationdesign"></a>
                 
@@ -131,7 +131,7 @@
             <section class="inner">
                 <section class="inner-main">
                     <div class="post">
-    <article id="post-cknsr8cam0001a9ll9dmi1nex" class="article article-type-post" itemscope
+    <article id="post-cknt5fpbf0001iallat613wb5" class="article article-type-post" itemscope
     itemprop="blogPost">
 
     <div class="article-inner">
@@ -163,29 +163,12 @@
             
 
             
-      2kviews.
             
 
         </div>
 
         <div class="article-entry post-inner-html hairline" itemprop="articleBody">
-            <p>We can invoke the data we want according to the structure of the relevant receiver service by filtering through the HTTPS sender adapter over the same url endpoint.Some special https request headers are added to exchange headers for further processing in integration flow.One of these is the CamelHttpQuery header. We will use it to use the filter parameter that we will add to the URL.<br>‘CamelHttpQuery : Refers to the query string that is contained in the request URL.In case a receiving adapter is used, this header can be used to dynamically change the URI to be called.’<br>Sample Request URL :<br>https://<iflow-tenant URL>/?$filter=<Field Name> eq ‘<Field Value>’<br>CamelHttpQuery = ?$filter=<Field Name> eq ‘<Field Value>’<br>Sample Scenario</p>
-<p>In our scenario, we will call the ‘TimeAccount’ entity over the Success Factors adapter using the filter parameter on the request url. We will edit the ‘CamelHttpQuery’ header with a script. In this way, we will be able to filter on the field we want.<br>Configuration Steps<br>Step 1 : Defining a Groovy Script for configuring ‘CamelHttpQuery’<br>We get the filter from the CamelHttpQuery header and add it to the ‘filterKey’ header. In addition, when we want to call all data without using filtering, since there is no filter value on the address, the ‘filterKey’ header will be defined as empty. In this way, we will be able to invoke all the data over the same request url.<br>import com.sap.gateway.ip.core.customdev.util.Message;<br>import java.util.HashMap;<br>import java.io.*;<br>import javax.ws.rs.core.Context;def Message processData(Message message) {</p>
-<pre><code>def body = message.getBody(java.lang.String) as String;
-def uri = message.getHeaders().get(&quot;CamelHttpQuery&quot;);
-if(uri != null &amp;&amp; !uri.isEmpty())&#123;
-    message.setHeader(&quot;filterKey&quot;,uri);
-    message.setBody(body);
-    return message;
-&#125;else &#123;
-    message.setHeader(&quot;filterKey&quot;,&quot;&quot;);
-    message.setBody(body);
-    return message;
-&#125; 
-</code></pre>
-<p>}<br>Step 2 : Configuring Receiver Success Factors Adapter<br>In this section, in the Proccesing tab/Query Options section ,we add the ‘filterKey’ header that we defined in the script to the filter section.</p>
-<p>Testing from POSTMAN;<br>https://<iflow-tenant URL>/http/TimeAccount?$filter=userId eq ‘1’</p>
-<p>References; <a href="https://help.sap.com/viewer/368c481cd6954bdfa5d0435479fd4eaf/Cloud/en-US/0ae4a78909c4479cbc3cc414250919de.html">https://help.sap.com/viewer/368c481cd6954bdfa5d0435479fd4eaf/Cloud/en-US/0ae4a78909c4479cbc3cc414250919de.html</a></p>
+            <p>TEST</p>
 
         </div>
 
@@ -197,6 +180,7 @@ if(uri != null &amp;&amp; !uri.isEmpty())&#123;
 
     
 
+
     
 
     
@@ -205,7 +189,7 @@ if(uri != null &amp;&amp; !uri.isEmpty())&#123;
 <nav class="article-nav">
   
     <a href="/sapintegrationdesign/2021/04/21/Configuring-User-Defined-Message-Search-in-SAP-CPI/" id="article-nav-newer" class="article-nav-link-wrap">
-      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-caption">Previous Post</div>
       <div class="article-nav-title">
         
           Configuring User Defined Message Search in SAP CPI
@@ -215,35 +199,31 @@ if(uri != null &amp;&amp; !uri.isEmpty())&#123;
   
   
     <a href="/sapintegrationdesign/2021/04/18/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-caption">Next Post</div>
       <div class="article-nav-title">Hello World</div>
     </a>
   
 </nav>
 
 
+
     <section class="share">
         <div class="share-title">SHARE</div>
         <a class="share-item" target="_blank"
-            href="https://twitter.com/share?text=Adding Filter Parameters to Request URL using Groovy Script in SAP CPI - SapIntegrationDesign&url=https://sefaarslan.github.io/sapintegrationdesign/2021/04/21/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI/">
+            href="https://twitter.com/share?text=Adding Filter Parameters to Request URL using Groovy Script in SAP CPI - SAPIntegrationDesign&url=https://sefaarslan.github.io/sapintegrationdesign/2021/04/21/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI/">
             <box-icon type='logo' name='twitter'></box-icon>
         </a>
         <a class="share-item" target="_blank"
-            href="https://www.facebook.com/sharer.php?title=Adding Filter Parameters to Request URL using Groovy Script in SAP CPI - SapIntegrationDesign&u=https://sefaarslan.github.io/sapintegrationdesign/2021/04/21/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI/">
+            href="https://www.facebook.com/sharer.php?title=Adding Filter Parameters to Request URL using Groovy Script in SAP CPI - SAPIntegrationDesign&u=https://sefaarslan.github.io/sapintegrationdesign/2021/04/21/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI/">
             <box-icon name='facebook-square' type='logo' ></box-icon>
         </a>
         <!-- <a class="share-item" target="_blank"
-            href="https://service.weibo.com/share/share.php?title=Adding Filter Parameters to Request URL using Groovy Script in SAP CPI - SapIntegrationDesign&url=https://sefaarslan.github.io/sapintegrationdesign/2021/04/21/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI/&pic=">
+            href="https://service.weibo.com/share/share.php?title=Adding Filter Parameters to Request URL using Groovy Script in SAP CPI - SAPIntegrationDesign&url=https://sefaarslan.github.io/sapintegrationdesign/2021/04/21/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI/&pic=">
             <div class="n-icon n-icon-weibo"></div>
         </a> -->
     </section>
 
 </article>
-This post's Visitor Counts is
-   0
-   views.
-
-   <!-- hexo's local server only -->
 
 
 <section class="comments comments-disqus">
@@ -362,7 +342,7 @@ This post's Visitor Counts is
 
     <div class="footer-wrap">
         <div class="footer-inner"> 
-            SapIntegrationDesign &copy; 2021<br>
+            SAPIntegrationDesign &copy; 2021<br>
             Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
         </div>
     </div>

@@ -15,7 +15,7 @@
 
     <meta charset="utf-8">
     
-    <title>SapIntegrationDesign</title>
+    <title>SAPIntegrationDesign</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     
@@ -69,7 +69,7 @@
             <div class="header-type-inner">
                 
                     <div id="typed-strings" style="display:none">
-                        <p>SapIntegrationDesign</p>
+                        <p>SAPIntegrationDesign</p>
                     </div>
                     <a class="header-type-title" id="typed" href="/sapintegrationdesign"></a>
                 
@@ -149,8 +149,7 @@ class="article article-type-post"
     </header>
     <div class="article-entry post-inner-html">
         
-        <p>Generally, it is not easy to uniquely identify a message required for further analysis when there are many messages in the system. The CPI does not have a function such as User Defined Message Search (UDMS) in PI.<br>With the help of two standard headers, this feature can be enabled in Integration Flows to define a message based on a unique or key field from the message content.<br>We may use the Application Message ID and Application MessageType for our purposes. This is achieved by filling the message header ‘SAP_ApplicationID’ and ‘SAP_MessageType’ with an appropriate value.It is on the developer to think what is the appropriate value to place in the Application Message ID. This may be a unique value sent by the sending system, or possibly a filename in case of file-based integration.<br>How to configure these parameters<br>These headers can be populated using the Content Modifier step.<br>SAP_ApplicationID: Populate the key field from the XPath, camel expression or any supported header types in the content modifier.<br>SAP_MessageType: Configure the name of the key field you are capturing in SAP_Application ID.<br>For example;<br>Ex: National Id : 12312132312<br>SAP_ApplicationID: //nationalId<br>SAP_MessageType: National Id</p>
-<p>The screenshot below shows how to search a message by national Id.</p>
+        <p>test</p>
 
         
     </div>
@@ -194,23 +193,7 @@ class="article article-type-post"
     </header>
     <div class="article-entry post-inner-html">
         
-        <p>We can invoke the data we want according to the structure of the relevant receiver service by filtering through the HTTPS sender adapter over the same url endpoint.Some special https request headers are added to exchange headers for further processing in integration flow.One of these is the CamelHttpQuery header. We will use it to use the filter parameter that we will add to the URL.<br>‘CamelHttpQuery : Refers to the query string that is contained in the request URL.In case a receiving adapter is used, this header can be used to dynamically change the URI to be called.’<br>Sample Request URL :<br>https://<iflow-tenant URL>/?$filter=<Field Name> eq ‘<Field Value>’<br>CamelHttpQuery = ?$filter=<Field Name> eq ‘<Field Value>’<br>Sample Scenario</p>
-<p>In our scenario, we will call the ‘TimeAccount’ entity over the Success Factors adapter using the filter parameter on the request url. We will edit the ‘CamelHttpQuery’ header with a script. In this way, we will be able to filter on the field we want.<br>Configuration Steps<br>Step 1 : Defining a Groovy Script for configuring ‘CamelHttpQuery’<br>We get the filter from the CamelHttpQuery header and add it to the ‘filterKey’ header. In addition, when we want to call all data without using filtering, since there is no filter value on the address, the ‘filterKey’ header will be defined as empty. In this way, we will be able to invoke all the data over the same request url.<br>import com.sap.gateway.ip.core.customdev.util.Message;<br>import java.util.HashMap;<br>import java.io.*;<br>import javax.ws.rs.core.Context;def Message processData(Message message) {</p>
-<pre><code>def body = message.getBody(java.lang.String) as String;
-def uri = message.getHeaders().get(&quot;CamelHttpQuery&quot;);
-if(uri != null &amp;&amp; !uri.isEmpty())&#123;
-    message.setHeader(&quot;filterKey&quot;,uri);
-    message.setBody(body);
-    return message;
-&#125;else &#123;
-    message.setHeader(&quot;filterKey&quot;,&quot;&quot;);
-    message.setBody(body);
-    return message;
-&#125; 
-</code></pre>
-<p>}<br>Step 2 : Configuring Receiver Success Factors Adapter<br>In this section, in the Proccesing tab/Query Options section ,we add the ‘filterKey’ header that we defined in the script to the filter section.</p>
-<p>Testing from POSTMAN;<br>https://<iflow-tenant URL>/http/TimeAccount?$filter=userId eq ‘1’</p>
-<p>References; <a href="https://help.sap.com/viewer/368c481cd6954bdfa5d0435479fd4eaf/Cloud/en-US/0ae4a78909c4479cbc3cc414250919de.html">https://help.sap.com/viewer/368c481cd6954bdfa5d0435479fd4eaf/Cloud/en-US/0ae4a78909c4479cbc3cc414250919de.html</a></p>
+        <p>TEST</p>
 
         
     </div>
@@ -372,7 +355,7 @@ class="article article-type-post"
 
     <div class="footer-wrap">
         <div class="footer-inner"> 
-            SapIntegrationDesign &copy; 2021<br>
+            SAPIntegrationDesign &copy; 2021<br>
             Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
         </div>
     </div>
