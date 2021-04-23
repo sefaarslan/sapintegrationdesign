@@ -17,7 +17,6 @@
     
     <title>SAP Integration Design</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
     
 
     
@@ -63,7 +62,7 @@
         <div class="header-type">
             
             <div class="header-type-avatar avatar avatar-sm">
-                <img src="https://i.pinimg.com/originals/d1/9b/da/d19bda2dd426a379097d18b2af9ec7aa.jpg" alt="Sefa">
+              <img src="https://i.pinimg.com/originals/d1/9b/da/d19bda2dd426a379097d18b2af9ec7aa.jpg" alt="Sefa">
             </div>
             
             <div class="header-type-inner">
@@ -153,11 +152,21 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/sapintegrationdesign/2021/04/21/SAP-CPI/Configuring-User-Defined-Message-Search-in-SAP-CPI/">Configuring User Defined Message Search in SAP CPI</a>
+<box-icon name='right-arrow' type='solid' animation='fade-left' color='#3c4859' size="20px" ></box-icon>
+        <a href="/sapintegrationdesign/2021/04/23/SAP-CPI/Configuring-User-Defined-Message-Search-in-SAP-CPI/">Configuring User Defined Message Search in SAP CPI</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <p>test</p>
+        <p>Generally, it is not easy to uniquely identify a message required for further analysis when there are many messages in the system. The CPI does not have a function such as User Defined Message Search (UDMS) in PI.</p>
+<p>With the help of two standard headers, this feature can be enabled in Integration Flows to define a message based on a unique or key field from the message content.</p>
+<p>We may use the Application Message ID and Application MessageType for our purposes. This is achieved by filling the message header ‘SAP_ApplicationID’ and ‘SAP_MessageType’ with an appropriate value.It is on the developer to think what is the appropriate value to place in the Application Message ID. This may be a unique value sent by the sending system, or possibly a filename in case of file-based integration.</p>
+<h4>How to configure these parameters</h4>
+
+<p>These headers can be populated using the Content Modifier step.</p>
+<p><strong>SAP_ApplicationID</strong>: Populate the key field from the XPath, camel expression or any supported header types in the content modifier.</p>
+<p><strong>SAP_MessageType</strong>: Configure the name of the key field you are capturing in SAP_Application ID.</p>
+<p>For example;<br>Ex: National Id : 12312132312</p>
+<p>SAP_ApplicationID: //nationalId<br>SAP_MessageType: National Id</p>
 
         
     </div>
@@ -173,7 +182,7 @@ class="article article-type-post"
 <footer class="article-footer">
     <div class="article-more-info">
     <div class="article-date">
-  <time datetime="2021-04-21T15:46:16.000Z" itemprop="datePublished">2021-04-21</time>
+  <time datetime="2021-04-23T10:34:00.000Z" itemprop="datePublished">2021-04-23</time>
 </div>
     
         <div class="article-category">
@@ -181,53 +190,9 @@ class="article article-type-post"
         </div>
     
     
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-SAP-CPI/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/sapintegrationdesign/2021/04/21/SAP-CPI/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI/">Adding Filter Parameters to Request URL using Groovy Script in SAP CPI</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p>TEST</p>
-
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-04-21T15:43:44.000Z" itemprop="datePublished">2021-04-21</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/sapintegrationdesign/categories/SAP-CPI/">SAP-CPI</a>
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sapintegrationdesign/tags/cloud/" rel="tag">cloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sapintegrationdesign/tags/cpi/" rel="tag">cpi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sapintegrationdesign/tags/integration/" rel="tag">integration</a></li></ul>
         </div>
-    
     
     </div>
 </footer>
@@ -249,6 +214,7 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
+<box-icon name='right-arrow' type='solid' animation='fade-left' color='#3c4859' size="20px" ></box-icon>
         <a href="/sapintegrationdesign/2021/04/18/hello-world/">Hello World</a>
     </header>
     <div class="article-entry post-inner-html">
@@ -325,7 +291,7 @@ class="article article-type-post"
   <div class="widget-wrap widget-tags">
     <div class="widget-title"><span>Tags</span></div>
     <div class="widget-inner">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/diary/" rel="tag">diary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/program/" rel="tag">program</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/web/" rel="tag">web</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/cloud/" rel="tag">cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/cpi/" rel="tag">cpi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/diary/" rel="tag">diary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/integration/" rel="tag">integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/platform/" rel="tag">platform</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/program/" rel="tag">program</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/web/" rel="tag">web</a></li></ul>
     </div>
   </div>
 
@@ -338,11 +304,7 @@ class="article article-type-post"
       <ul>
         
           <li>
-            <a href="/sapintegrationdesign/2021/04/21/SAP-CPI/Configuring-User-Defined-Message-Search-in-SAP-CPI/">Configuring User Defined Message Search in SAP CPI</a>
-          </li>
-        
-          <li>
-            <a href="/sapintegrationdesign/2021/04/21/SAP-CPI/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI/">Adding Filter Parameters to Request URL using Groovy Script in SAP CPI</a>
+            <a href="/sapintegrationdesign/2021/04/23/SAP-CPI/Configuring-User-Defined-Message-Search-in-SAP-CPI/">Configuring User Defined Message Search in SAP CPI</a>
           </li>
         
           <li>
