@@ -28,6 +28,8 @@
     
 
     
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    
 
     
 
@@ -40,6 +42,16 @@
     <script>
         window.isPost = false
         window.aomori = {
+            
+            gitalk: {
+                enable: true,
+                clientID: "2788e1b4fc15f4d872fd",
+                clientSecret: "6729cec5e5d214f3f6410ebf8e61bce882a3dee3",
+                repo: "sapintegrationdesign",
+                owner: "sefaarslan",
+                admin: ["sefaarslan",],
+                distractionFreeMode: true // Facebook-like distraction free mode  // Facebook-like distraction free mode
+            },
             
             
             
@@ -144,12 +156,13 @@
 <div class="page">
   
 <article
-id="page-cknx4tkpv00077allexyf491r"
+id="page-cknyske5s0003zhllc1ht745p"
 class="article article-type-page"
 >
   <div class="article-inner">
       <div class="article-entry post-inner-html">
-          <h4> Send Article Form</h4>
+          <section>
+<h4> Send Article Form</h4>
 <div>
   <form accept-charset="UTF-8" action="https://getform.io/f/5581b880-2d45-4aca-add8-2b4fef172260" method="POST" enctype="multipart/form-data" target="_blank">
     <div class="form-group">
@@ -179,6 +192,8 @@ class="article article-type-page"
     <button type="submit" class="btn btn-primary">Send</button>
 </form>
 </div>
+</section>
+
       </div>
   </div>
 </article>
@@ -287,6 +302,8 @@ class="article article-type-page"
 
 </footer>
 
+
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 
 
 
