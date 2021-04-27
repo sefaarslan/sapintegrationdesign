@@ -153,6 +153,75 @@
   
     
       <article
+id="post-SAP-CPI/Configuring-User-Defined-Message-Search-in-SAP-CPI"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+<box-icon name='right-arrow' type='solid' animation='fade-left' color='#3c4859' size="20px" ></box-icon>
+        <a href="/sapintegrationdesign/2021/04/23/SAP-CPI/Configuring-User-Defined-Message-Search-in-SAP-CPI/">Configuring User Defined Message Search in SAP CPI</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <p>Generally, it is not easy to uniquely identify a message required for further analysis when there are many messages in the system. The CPI does not have a function such as User Defined Message Search (UDMS) in PI.</p>
+<p>With the help of two standard headers, this feature can be enabled in Integration Flows to define a message based on a unique or key field from the message content.</p>
+<p>We may use the Application Message ID and Application MessageType for our purposes. This is achieved by filling the message header ‘SAP_ApplicationID’ and ‘SAP_MessageType’ with an appropriate value.It is on the developer to think what is the appropriate value to place in the Application Message ID. This may be a unique value sent by the sending system, or possibly a filename in case of file-based integration.</p>
+<h4>How to configure these parameters</h4>
+
+<p>These headers can be populated using the Content Modifier step.</p>
+<p><strong>SAP_ApplicationID</strong>: Populate the key field from the XPath, camel expression or any supported header types in the content modifier.</p>
+<p><strong>SAP_MessageType</strong>: Configure the name of the key field you are capturing in SAP_Application ID.</p>
+<p>For example;<br>Ex: National Id : 12312132312</p>
+<p>SAP_ApplicationID: //nationalId<br>SAP_MessageType: National Id</p>
+<p><img src="/sapintegrationdesign/images/cpi1.png" alt="Alt Text"></p>
+<p>The screenshot below shows how to search a message by national Id.</p>
+<p><img src="/sapintegrationdesign/images/cpi2.png" alt="Alt Text"></p>
+
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        <div class="article-top">
+            <box-icon type='solid' name='to-top' color='#ffffff' size='xs'></box-icon>
+        </div>
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-04-23T10:34:00.000Z" itemprop="datePublished">2021-04-23</time>
+</div>
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/sapintegrationdesign/categories/SAP-CPI/">SAP-CPI</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sapintegrationdesign/tags/cloud/" rel="tag">cloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sapintegrationdesign/tags/cpi/" rel="tag">cpi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sapintegrationdesign/tags/integration/" rel="tag">integration</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
   id="tweet-hello-world"
   class="article article-type-tweet"
 >
@@ -193,71 +262,6 @@
         </div>
 
     </div>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-SAP-CPI/Configuring-User-Defined-Message-Search-in-SAP-CPI"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-<box-icon name='right-arrow' type='solid' animation='fade-left' color='#3c4859' size="20px" ></box-icon>
-        <a href="/sapintegrationdesign/2021/04/23/SAP-CPI/Configuring-User-Defined-Message-Search-in-SAP-CPI/">Configuring User Defined Message Search in SAP CPI</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p>Generally, it is not easy to uniquely identify a message required for further analysis when there are many messages in the system. The CPI does not have a function such as User Defined Message Search (UDMS) in PI.</p>
-<p>With the help of two standard headers, this feature can be enabled in Integration Flows to define a message based on a unique or key field from the message content.</p>
-<p>We may use the Application Message ID and Application MessageType for our purposes. This is achieved by filling the message header ‘SAP_ApplicationID’ and ‘SAP_MessageType’ with an appropriate value.It is on the developer to think what is the appropriate value to place in the Application Message ID. This may be a unique value sent by the sending system, or possibly a filename in case of file-based integration.</p>
-<h4>How to configure these parameters</h4>
-
-<p>These headers can be populated using the Content Modifier step.</p>
-<p><strong>SAP_ApplicationID</strong>: Populate the key field from the XPath, camel expression or any supported header types in the content modifier.</p>
-<p><strong>SAP_MessageType</strong>: Configure the name of the key field you are capturing in SAP_Application ID.</p>
-<p>For example;<br>Ex: National Id : 12312132312</p>
-<p>SAP_ApplicationID: //nationalId<br>SAP_MessageType: National Id</p>
-<p><img src="/sapintegrationdesign/images/cpi1.png" alt="Alt Text"></p>
-<p>The screenshot below shows how to search a message by national Id.</p>
-<p><img src="/sapintegrationdesign/images/cpi2.png" alt="Alt Text"></p>
-
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-04-23T10:34:00.000Z" itemprop="datePublished">2021-04-23</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/sapintegrationdesign/categories/SAP-CPI/">SAP-CPI</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sapintegrationdesign/tags/cloud/" rel="tag">cloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sapintegrationdesign/tags/cpi/" rel="tag">cpi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sapintegrationdesign/tags/integration/" rel="tag">integration</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
 
 </article>
 
