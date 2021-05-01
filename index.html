@@ -149,7 +149,7 @@
   
     
       <article
-  id="tweet-hello-world"
+  id="tweet-SAP-PI-PO/hello-world"
   class="article article-type-tweet"
 >
 
@@ -165,15 +165,15 @@
         </div>
 
         <footer class="article-footer">
-            <a class="article-footer-common" href="/sapintegrationdesign/2021/04/18/hello-world/">Comment</a>
+            <a class="article-footer-common" href="/sapintegrationdesign/2021/04/23/SAP-PI-PO/hello-world/">Comment</a>
             <div class="article-more-info">
             <div class="article-date">
-  <time datetime="2021-04-17T22:53:01.000Z" itemprop="datePublished">2021-04-18</time>
+  <time datetime="2021-04-22T23:00:00.000Z" itemprop="datePublished">2021-04-23</time>
 </div>
 
             
                 <div class="article-category">
-                <a class="article-category-link" href="/sapintegrationdesign/categories/SAP-PI-PO/">SAP PI/PO</a>
+                <a class="article-category-link" href="/sapintegrationdesign/categories/SAP-PI-PO/">SAP-PI/PO</a>
                 </div>
             
             
@@ -190,6 +190,75 @@
         </div>
 
     </div>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-SAP-CPI/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+<box-icon name='right-arrow' type='solid' animation='fade-left' color='#3c4859' size="20px" ></box-icon>
+        <a href="/sapintegrationdesign/2021/04/23/SAP-CPI/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI/">Adding Filter Parameters to Request URL using Groovy Script in SAP CPI</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <p>We can invoke the data we want according to the structure of the relevant receiver service by filtering through the HTTPS sender adapter over the same url endpoint.Some special https request headers are added to exchange headers for further processing in integration flow.One of these is the CamelHttpQuery header. We will use it to use the filter parameter that we will add to the URL.</p>
+<p>‘CamelHttpQuery : Refers to the query string that is contained in the request URL.In case a receiving adapter is used, this header can be used to dynamically change the URI to be called.’</p>
+<p>Sample Request URL :<br>https://<iflow-tenant URL>/?$filter=<Field Name> eq ‘<Field Value>’<strong>CamelHttpQuery = ?$filter=<Field Name> eq ‘<Field Value>’</strong></p>
+<p><strong><h5>Sample Scenario</h5></strong></p>
+<p><img src="/sapintegrationdesign/images/cpi9.png" alt="Alt Text"></p>
+<p>In our scenario, we will call the ‘TimeAccount’ entity over the Success Factors adapter using the filter parameter on the request url. We will edit the ‘CamelHttpQuery’ header with a script. In this way, we will be able to filter on the field we want.</p>
+<p><strong><h5>Configuration Steps</h5></strong></p>
+<p><strong><h6>Step 1 : Defining a Groovy Script for configuring ‘CamelHttpQuery’</strong></h6></p>
+<p>We get the filter from the CamelHttpQuery header and add it to the ‘filterKey’ header. In addition, when we want to call all data without using filtering, since there is no filter value on the address, the ‘filterKey’ header will be defined as empty. In this way, we will be able to invoke all the data over the same request url.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.sap.gateway.ip.core.customdev.util.Message;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> javax.ws.rs.core.Context;<span class="keyword">def</span> Message processData(Message message) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> body = message.getBody(java.lang.String) <span class="keyword">as</span> String;</span><br><span class="line">    <span class="keyword">def</span> uri = message.getHeaders().get(<span class="string">&quot;CamelHttpQuery&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(uri != <span class="literal">null</span> &amp;&amp; !uri.isEmpty())&#123;</span><br><span class="line">        message.setHeader(<span class="string">&quot;filterKey&quot;</span>,uri);</span><br><span class="line">        message.setBody(body);</span><br><span class="line">        <span class="keyword">return</span> message;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        message.setHeader(<span class="string">&quot;filterKey&quot;</span>,<span class="string">&quot;&quot;</span>);</span><br><span class="line">        message.setBody(body);</span><br><span class="line">        <span class="keyword">return</span> message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><h6>Step 2 : Configuring Receiver Success Factors Adapter</strong></h6></p>
+<p>In this section, in the Proccesing tab/Query Options section ,we add the ‘filterKey’ header that we defined in the script to the filter section.</p>
+<p><img src="/sapintegrationdesign/images/cpi10.png" alt="Alt Text"></p>
+<p><strong><h6>Testing from POSTMAN;</strong></h6></p>
+<p><img src="/sapintegrationdesign/images/cpi11.png" alt="Alt Text"></p>
+
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-04-23T16:28:00.000Z" itemprop="datePublished">2021-04-23</time>
+</div>
+
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/sapintegrationdesign/categories/SAP-CPI/">SAP-CPI</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sapintegrationdesign/tags/cloud/" rel="tag">cloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sapintegrationdesign/tags/cpi/" rel="tag">cpi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sapintegrationdesign/tags/platform/" rel="tag">platform</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
 
 </article>
 
@@ -246,7 +315,79 @@ class="article article-type-post"
 
     
         <div class="article-category">
-        <a class="article-category-link" href="/sapintegrationdesign/categories/SAP-CPI/">SAP CPI</a>
+        <a class="article-category-link" href="/sapintegrationdesign/categories/SAP-CPI/">SAP-CPI</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sapintegrationdesign/tags/cloud/" rel="tag">cloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sapintegrationdesign/tags/cpi/" rel="tag">cpi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sapintegrationdesign/tags/integration/" rel="tag">integration</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-SAP-CPI/Invoking-Related-Data-using-Content-Enricher-and-OData-v2-adapters-in-SAP-CPI"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+<box-icon name='right-arrow' type='solid' animation='fade-left' color='#3c4859' size="20px" ></box-icon>
+        <a href="/sapintegrationdesign/2021/04/23/SAP-CPI/Invoking-Related-Data-using-Content-Enricher-and-OData-v2-adapters-in-SAP-CPI/">Invoking Related Data using Content Enricher and OData v2 adapters in SAP CPI</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <p>In this blog post, you will learn how to use a Content Enrich and more than one Odata adapters in SAP Cloud Platform Integration. In this direction, you will see the process of filtering from two different OData services on the basis of desired values and merging filtered records using Content Enricher.Also, all integrations may needs have one or more Enrich steps. Generally, the adapter connected to the Content Enricher invokes in all data from the backend system.This situation causing crashes and performance degradation.</p>
+<p>That’s why, we will model integration flow to handling large data is using dynamic queries using <strong>property</strong> and OData v2 <strong>$filter</strong> query option. In this example, we will be enriching <strong>EmpJob</strong> entity with <strong>TimeAccount</strong> by creating a dynamic filter in Successfactors OData v2 adapter.</p>
+<p><strong><h6>The Scenario</h6></strong></p>
+<p>In our scenario, we will invoke the userIds of the relevant company according to the company code from the EmbJob entity .Then, we will merge these userIds and the records in the TimeAccount entity that contains these userIds.We have configuring a looping process to fetch and enrich ‘EmpJob’ records in pages. The script step “Process Data” has the logic for creating a dynamic filter.</p>
+<p><img src="/sapintegrationdesign/images/cpi3.png" alt="Alt Text"></p>
+<p><strong><h5>Main Configuration Steps</h5></strong></p>
+<p><strong><h6>Step 1 : Obtaining userId’s of the companies</h6></strong></p>
+<p>First of all, we will define HTTPS adapter to obtain ‘CamponyCode’ record. Then,the external json data is converted to xml format thanks to ‘Json to Xml Converter’. The incoming data is sent via the ‘Content Modifier’ in the header section of the data.</p>
+<p><img src="/sapintegrationdesign/images/cpi4.png" alt="Alt Text"></p>
+<p>After ‘Request Reply’ is defined that is named ‘Invoking userId’ in the flow, SuccessFactors OData v2 adapter configurations are made as shown below. Thanks to this ,we have access to User Id records of company.</p>
+<p><img src="/sapintegrationdesign/images/cpi5.png" alt="Alt Text"></p>
+<p><strong><h6>Step 2 : Defining a Groovy Script for a dynamic query</h6></strong><br>Script Code is named ‘Process Data’ are defined below to construct the dynamic filter for ‘Content Enricher’. The first part of the script parses the Original Message and selects all the key elements using XmlSlurper. The second part forms the key element in the OData $filter format and sets it to property named masterKey.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.sap.gateway.ip.core.customdev.util.Message;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">def</span> Message processData(Message message) &#123;</span><br><span class="line"><span class="comment">//Body</span></span><br><span class="line">    <span class="keyword">def</span> body = message.getBody(java.io.Reader);</span><br><span class="line"><span class="comment">//Parse the key from Original message (FIRST PART)</span></span><br><span class="line">    <span class="keyword">def</span> response = <span class="keyword">new</span> XmlSlurper().parse(body);</span><br><span class="line">    <span class="keyword">def</span> keys = response.<span class="string">&#x27;**&#x27;</span>.findAll&#123; node-&gt; node.name() == <span class="string">&#x27;userId&#x27;</span> &#125;*.text();</span><br><span class="line"><span class="comment">//Formulate the filter query. Eg:$filter=userId in&#x27;107&#x27;(SECOND PART)</span></span><br><span class="line">    <span class="keyword">def</span> masterKey = <span class="string">&quot;&#x27;&quot;</span> + keys.unique().join(<span class="string">&quot;&#x27;,&#x27;&quot;</span>) + <span class="string">&quot;&#x27;&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(masterKey == <span class="literal">null</span> || masterKey.trim().isEmpty())&#123;</span><br><span class="line">message.setProperty(<span class="string">&quot;masterKey&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">message.setProperty(<span class="string">&quot;masterKey&quot;</span>, <span class="string">&quot;\$filter=userId in &quot;</span> + masterKey);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">return</span> message;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><h6>Step 3 : Merging records in the ‘Time Account’ entity that contains obtained user Ids using Content Enricher</h6></strong><br>With the help of content enricher, we will merge related Time Account records to the XML structure containing user ids. For this, we will match the userId field in both XML structures as follows.<br><img src="/sapintegrationdesign/images/cpi6.png" alt="Alt Text"></p>
+<p>Next, we will define SuccessFactors OData v2 receiver adapter to invoke TimeAccount entity records. Add the property masterKey in the query option.</p>
+<p><img src="/sapintegrationdesign/images/cpi7.png" alt="Alt Text"></p>
+<p>Testing from POSTMAN;</p>
+<p><img src="/sapintegrationdesign/images/cpi8.png" alt="Alt Text"></p>
+
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-04-23T10:34:00.000Z" itemprop="datePublished">2021-04-23</time>
+</div>
+
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/sapintegrationdesign/categories/SAP-CPI/">SAP-CPI</a>
         </div>
     
     
@@ -292,7 +433,7 @@ class="article article-type-post"
   <div class="widget-wrap widget-cate">
     <div class="widget-title"><span>Categories</span></div>
     <div class="widget-inner">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/sapintegrationdesign/categories/SAP-CPI/">SAP CPI</a></li><li class="category-list-item"><a class="category-list-link" href="/sapintegrationdesign/categories/SAP-PI-PO/">SAP PI/PO</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/sapintegrationdesign/categories/SAP-CPI/">SAP-CPI</a></li><li class="category-list-item"><a class="category-list-link" href="/sapintegrationdesign/categories/SAP-PI-PO/">SAP-PI/PO</a></li></ul>
     </div>
   </div>
 
@@ -302,7 +443,7 @@ class="article article-type-post"
   <div class="widget-wrap widget-tags">
     <div class="widget-title"><span>Tags</span></div>
     <div class="widget-inner">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/cloud/" rel="tag">cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/cpi/" rel="tag">cpi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/integration/" rel="tag">integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/platform/" rel="tag">platform</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/cloud/" rel="tag">cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/cpi/" rel="tag">cpi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/integration/" rel="tag">integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/platform/" rel="tag">platform</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/sap/" rel="tag">sap</a></li></ul>
     </div>
   </div>
 
@@ -315,11 +456,19 @@ class="article article-type-post"
       <ul>
         
           <li>
+            <a href="/sapintegrationdesign/2021/04/23/SAP-CPI/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI/">Adding Filter Parameters to Request URL using Groovy Script in SAP CPI</a>
+          </li>
+        
+          <li>
             <a href="/sapintegrationdesign/2021/04/23/SAP-CPI/Configuring-User-Defined-Message-Search-in-SAP-CPI/">Configuring User Defined Message Search in SAP CPI</a>
           </li>
         
           <li>
-            <a href="/sapintegrationdesign/2021/04/18/hello-world/">Hello World</a>
+            <a href="/sapintegrationdesign/2021/04/23/SAP-CPI/Invoking-Related-Data-using-Content-Enricher-and-OData-v2-adapters-in-SAP-CPI/">Invoking Related Data using Content Enricher and OData v2 adapters in SAP CPI</a>
+          </li>
+        
+          <li>
+            <a href="/sapintegrationdesign/2021/04/23/SAP-PI-PO/hello-world/">Hello World</a>
           </li>
         
       </ul>

@@ -15,7 +15,7 @@
 
     <meta charset="utf-8">
     
-    <title>Hello World | SAP Integration Design</title>
+    <title>Adding Filter Parameters to Request URL using Groovy Script in SAP CPI | SAP Integration Design</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
 
@@ -145,8 +145,8 @@
         <div class="main">
             <section class="inner">
                 <section class="inner-main">
-                    <div class="tweet">
-    <article id="tweet-cknzzbuxr000152ll78zhd61p" class="article article-type-tweet" itemscope
+                    <div class="post">
+    <article id="post-cko5zuawb0001nxllbv1a3mfl" class="article article-type-post" itemscope
     itemprop="blogPost">
 
     <div class="article-inner">
@@ -157,20 +157,40 @@
         
 
         
+        <header class="article-header">
 
-        <div class="article-more-info article-more-info-tweet hairline">
+            
+  
+
+    <h1 class="article-title" itemprop="name">
+      <box-icon name='right-arrow' type='solid' animation='fade-left' color='#3c4859' size="20px" ></box-icon>
+
+      Adding Filter Parameters to Request URL using Groovy Script in SAP CPI
+    </h1>
+  
+
+
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
 
             <div class="article-date">
-  <time datetime="2021-04-17T22:53:01.000Z" itemprop="datePublished">2021-04-18</time>
+  <time datetime="2021-04-23T16:28:00.000Z" itemprop="datePublished">2021-04-23</time>
 </div>
 
 
             
             <div class="article-category">
-                <a class="article-category-link" href="/sapintegrationdesign/categories/SAP-PI-PO/">SAP PI/PO</a>
+                <a class="article-category-link" href="/sapintegrationdesign/categories/SAP-CPI/">SAP-CPI</a>
             </div>
             
 
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sapintegrationdesign/tags/cloud/" rel="tag">cloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sapintegrationdesign/tags/cpi/" rel="tag">cpi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sapintegrationdesign/tags/platform/" rel="tag">platform</a></li></ul>
+            </div>
             
             
             <div class="article-busuanzi">Visitor Count : 
@@ -182,7 +202,22 @@
 
         <div class="article-entry post-inner-html hairline" itemprop="articleBody">
 
-            <p>Sefa arslan</p>
+            <p>We can invoke the data we want according to the structure of the relevant receiver service by filtering through the HTTPS sender adapter over the same url endpoint.Some special https request headers are added to exchange headers for further processing in integration flow.One of these is the CamelHttpQuery header. We will use it to use the filter parameter that we will add to the URL.</p>
+<p>‘CamelHttpQuery : Refers to the query string that is contained in the request URL.In case a receiving adapter is used, this header can be used to dynamically change the URI to be called.’</p>
+<p>Sample Request URL :<br>https://<iflow-tenant URL>/?$filter=<Field Name> eq ‘<Field Value>’<strong>CamelHttpQuery = ?$filter=<Field Name> eq ‘<Field Value>’</strong></p>
+<p><strong><h5>Sample Scenario</h5></strong></p>
+<p><img src="/sapintegrationdesign/images/cpi9.png" alt="Alt Text"></p>
+<p>In our scenario, we will call the ‘TimeAccount’ entity over the Success Factors adapter using the filter parameter on the request url. We will edit the ‘CamelHttpQuery’ header with a script. In this way, we will be able to filter on the field we want.</p>
+<p><strong><h5>Configuration Steps</h5></strong></p>
+<p><strong><h6>Step 1 : Defining a Groovy Script for configuring ‘CamelHttpQuery’</strong></h6></p>
+<p>We get the filter from the CamelHttpQuery header and add it to the ‘filterKey’ header. In addition, when we want to call all data without using filtering, since there is no filter value on the address, the ‘filterKey’ header will be defined as empty. In this way, we will be able to invoke all the data over the same request url.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.sap.gateway.ip.core.customdev.util.Message;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> javax.ws.rs.core.Context;<span class="keyword">def</span> Message processData(Message message) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> body = message.getBody(java.lang.String) <span class="keyword">as</span> String;</span><br><span class="line">    <span class="keyword">def</span> uri = message.getHeaders().get(<span class="string">&quot;CamelHttpQuery&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(uri != <span class="literal">null</span> &amp;&amp; !uri.isEmpty())&#123;</span><br><span class="line">        message.setHeader(<span class="string">&quot;filterKey&quot;</span>,uri);</span><br><span class="line">        message.setBody(body);</span><br><span class="line">        <span class="keyword">return</span> message;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        message.setHeader(<span class="string">&quot;filterKey&quot;</span>,<span class="string">&quot;&quot;</span>);</span><br><span class="line">        message.setBody(body);</span><br><span class="line">        <span class="keyword">return</span> message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><h6>Step 2 : Configuring Receiver Success Factors Adapter</strong></h6></p>
+<p>In this section, in the Proccesing tab/Query Options section ,we add the ‘filterKey’ header that we defined in the script to the filter section.</p>
+<p><img src="/sapintegrationdesign/images/cpi10.png" alt="Alt Text"></p>
+<p><strong><h6>Testing from POSTMAN;</strong></h6></p>
+<p><img src="/sapintegrationdesign/images/cpi11.png" alt="Alt Text"></p>
 
         </div>
 
@@ -191,17 +226,22 @@
     
 
     
+
+    
+
+
+    
+
+    
+
+    
 <nav class="article-nav">
   
-    <a href="/sapintegrationdesign/2021/04/23/SAP-CPI/Configuring-User-Defined-Message-Search-in-SAP-CPI/" id="article-nav-newer" class="article-nav-link-wrap">
-      <div class="article-nav-caption">Previous Post</div>
-      <div class="article-nav-title">
-        
-          Configuring User Defined Message Search in SAP CPI
-        
-      </div>
-    </a>
   
+    <a href="/sapintegrationdesign/2021/04/23/SAP-CPI/Configuring-User-Defined-Message-Search-in-SAP-CPI/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">Next Post</div>
+      <div class="article-nav-title">Configuring User Defined Message Search in SAP CPI</div>
+    </a>
   
 </nav>
 
@@ -210,15 +250,15 @@
     <section class="share">
         <div class="share-title">SHARE</div>
         <a class="share-item" target="_blank"
-            href="https://twitter.com/share?text=Hello World - SAP Integration Design&url=https://sefaarslan.github.io/sapintegrationdesign/2021/04/18/hello-world/">
+            href="https://twitter.com/share?text=Adding Filter Parameters to Request URL using Groovy Script in SAP CPI - SAP Integration Design&url=https://sefaarslan.github.io/sapintegrationdesign/2021/04/23/SAP-CPI/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI/">
             <box-icon type='logo' name='twitter'></box-icon>
         </a>
         <a class="share-item" target="_blank"
-            href="https://www.facebook.com/sharer.php?title=Hello World - SAP Integration Design&u=https://sefaarslan.github.io/sapintegrationdesign/2021/04/18/hello-world/">
+            href="https://www.facebook.com/sharer.php?title=Adding Filter Parameters to Request URL using Groovy Script in SAP CPI - SAP Integration Design&u=https://sefaarslan.github.io/sapintegrationdesign/2021/04/23/SAP-CPI/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI/">
             <box-icon name='facebook-square' type='logo' ></box-icon>
         </a>
         <a class="share-item" target="_blank"
-            href="https://www.linkedin.com/shareArticle?mini=true&url=https://sefaarslan.github.io/sapintegrationdesign/2021/04/18/hello-world/">
+            href="https://www.linkedin.com/shareArticle?mini=true&url=https://sefaarslan.github.io/sapintegrationdesign/2021/04/23/SAP-CPI/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI/">
             <box-icon name='linkedin-square' type='logo' ></box-icon>
         </a>
     </section>
@@ -266,12 +306,18 @@
 <div class="widget" id="widget">
     
       
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
     
       
   <div class="widget-wrap widget-cate">
     <div class="widget-title"><span>Categories</span></div>
     <div class="widget-inner">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/sapintegrationdesign/categories/SAP-CPI/">SAP CPI</a></li><li class="category-list-item"><a class="category-list-link" href="/sapintegrationdesign/categories/SAP-PI-PO/">SAP PI/PO</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/sapintegrationdesign/categories/SAP-CPI/">SAP-CPI</a></li><li class="category-list-item"><a class="category-list-link" href="/sapintegrationdesign/categories/SAP-PI-PO/">SAP-PI/PO</a></li></ul>
     </div>
   </div>
 
@@ -281,7 +327,7 @@
   <div class="widget-wrap widget-tags">
     <div class="widget-title"><span>Tags</span></div>
     <div class="widget-inner">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/cloud/" rel="tag">cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/cpi/" rel="tag">cpi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/integration/" rel="tag">integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/platform/" rel="tag">platform</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/cloud/" rel="tag">cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/cpi/" rel="tag">cpi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/integration/" rel="tag">integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/platform/" rel="tag">platform</a></li><li class="tag-list-item"><a class="tag-list-link" href="/sapintegrationdesign/tags/sap/" rel="tag">sap</a></li></ul>
     </div>
   </div>
 
@@ -294,11 +340,19 @@
       <ul>
         
           <li>
+            <a href="/sapintegrationdesign/2021/04/23/SAP-CPI/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI/">Adding Filter Parameters to Request URL using Groovy Script in SAP CPI</a>
+          </li>
+        
+          <li>
             <a href="/sapintegrationdesign/2021/04/23/SAP-CPI/Configuring-User-Defined-Message-Search-in-SAP-CPI/">Configuring User Defined Message Search in SAP CPI</a>
           </li>
         
           <li>
-            <a href="/sapintegrationdesign/2021/04/18/hello-world/">Hello World</a>
+            <a href="/sapintegrationdesign/2021/04/23/SAP-CPI/Invoking-Related-Data-using-Content-Enricher-and-OData-v2-adapters-in-SAP-CPI/">Invoking Related Data using Content Enricher and OData v2 adapters in SAP CPI</a>
+          </li>
+        
+          <li>
+            <a href="/sapintegrationdesign/2021/04/23/SAP-PI-PO/hello-world/">Hello World</a>
           </li>
         
       </ul>
