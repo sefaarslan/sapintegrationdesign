@@ -146,7 +146,7 @@
             <section class="inner">
                 <section class="inner-main">
                     <div class="post">
-    <article id="post-cko71dpql0003p1llc35ad9yw" class="article article-type-post" itemscope
+    <article id="post-cko71igaa00012fll9mjb0tuc" class="article article-type-post" itemscope
     itemprop="blogPost">
 
     <div class="article-inner">
@@ -202,7 +202,7 @@
 <p>‘CamelHttpQuery : Refers to the query string that is contained in the request URL.In case a receiving adapter is used, this header can be used to dynamically change the URI to be called.’</p>
 <p>Sample Request URL :<br>https://<iflow-tenant URL>/?$filter=<Field Name> eq ‘<Field Value>’<strong>CamelHttpQuery = ?$filter=<Field Name> eq ‘<Field Value>’</strong></p>
 <p><strong><h5>Sample Scenario</h5></strong></p>
-<p><img src="/sapintegrationdesign/images/cpi9.png" alt="Alt Text"></p>
+<p><img src="/images/cpi9.png" alt="Alt Text"></p>
 <p>In our scenario, we will call the ‘TimeAccount’ entity over the Success Factors adapter using the filter parameter on the request url. We will edit the ‘CamelHttpQuery’ header with a script. In this way, we will be able to filter on the field we want.</p>
 <p><strong><h5>Configuration Steps</h5></strong></p>
 <p><strong><h6>Step 1 : Defining a Groovy Script for configuring ‘CamelHttpQuery’</strong></h6></p>
@@ -211,9 +211,9 @@
 
 <p><strong><h6>Step 2 : Configuring Receiver Success Factors Adapter</strong></h6></p>
 <p>In this section, in the Proccesing tab/Query Options section ,we add the ‘filterKey’ header that we defined in the script to the filter section.</p>
-<p><img src="/sapintegrationdesign/images/cpi10.png" alt="Alt Text"></p>
+<p><img src="/images/cpi10.png" alt="Alt Text"></p>
 <p><strong><h6>Testing from POSTMAN;</strong></h6></p>
-<p><img src="/sapintegrationdesign/images/cpi11.png" alt="Alt Text"></p>
+<p><img src="/images/cpi11.png" alt="Alt Text"></p>
 
         </div>
 

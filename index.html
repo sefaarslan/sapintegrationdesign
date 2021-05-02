@@ -217,7 +217,7 @@ class="article article-type-post"
 <p>‘CamelHttpQuery : Refers to the query string that is contained in the request URL.In case a receiving adapter is used, this header can be used to dynamically change the URI to be called.’</p>
 <p>Sample Request URL :<br>https://<iflow-tenant URL>/?$filter=<Field Name> eq ‘<Field Value>’<strong>CamelHttpQuery = ?$filter=<Field Name> eq ‘<Field Value>’</strong></p>
 <p><strong><h5>Sample Scenario</h5></strong></p>
-<p><img src="/sapintegrationdesign/images/cpi9.png" alt="Alt Text"></p>
+<p><img src="/images/cpi9.png" alt="Alt Text"></p>
 <p>In our scenario, we will call the ‘TimeAccount’ entity over the Success Factors adapter using the filter parameter on the request url. We will edit the ‘CamelHttpQuery’ header with a script. In this way, we will be able to filter on the field we want.</p>
 <p><strong><h5>Configuration Steps</h5></strong></p>
 <p><strong><h6>Step 1 : Defining a Groovy Script for configuring ‘CamelHttpQuery’</strong></h6></p>
@@ -226,9 +226,9 @@ class="article article-type-post"
 
 <p><strong><h6>Step 2 : Configuring Receiver Success Factors Adapter</strong></h6></p>
 <p>In this section, in the Proccesing tab/Query Options section ,we add the ‘filterKey’ header that we defined in the script to the filter section.</p>
-<p><img src="/sapintegrationdesign/images/cpi10.png" alt="Alt Text"></p>
+<p><img src="/images/cpi10.png" alt="Alt Text"></p>
 <p><strong><h6>Testing from POSTMAN;</strong></h6></p>
-<p><img src="/sapintegrationdesign/images/cpi11.png" alt="Alt Text"></p>
+<p><img src="/images/cpi11.png" alt="Alt Text"></p>
 
         
     </div>
@@ -292,9 +292,9 @@ class="article article-type-post"
 <p><strong>SAP_MessageType</strong>: Configure the name of the key field you are capturing in SAP_Application ID.</p>
 <p>For example;<br>Ex: National Id : 12312132312</p>
 <p>SAP_ApplicationID: //nationalId<br>SAP_MessageType: National Id</p>
-<p><img src="/sapintegrationdesign/images/cpi1.png" alt="Alt Text"></p>
+<p><img src="/images/cpi1.png" alt="Alt Text"></p>
 <p>The screenshot below shows how to search a message by national Id.</p>
-<p><img src="/sapintegrationdesign/images/cpi2.png" alt="Alt Text"></p>
+<p><img src="/images/cpi2.png" alt="Alt Text"></p>
 
         
     </div>
@@ -356,17 +356,17 @@ class="article article-type-post"
 <p><strong><h5>Main Configuration Steps</h5></strong></p>
 <p><strong><h6>Step 1 : Obtaining userId’s of the companies</h6></strong></p>
 <p>First of all, we will define HTTPS adapter to obtain ‘CamponyCode’ record. Then,the external json data is converted to xml format thanks to ‘Json to Xml Converter’. The incoming data is sent via the ‘Content Modifier’ in the header section of the data.</p>
-<p><img src="/sapintegrationdesign/images/cpi4.png" alt="Alt Text"></p>
+<p><img src="/images/cpi4.png" alt="Alt Text"></p>
 <p>After ‘Request Reply’ is defined that is named ‘Invoking userId’ in the flow, SuccessFactors OData v2 adapter configurations are made as shown below. Thanks to this ,we have access to User Id records of company.</p>
-<p><img src="/sapintegrationdesign/images/cpi5.png" alt="Alt Text"></p>
+<p><img src="/images/cpi5.png" alt="Alt Text"></p>
 <p><strong><h6>Step 2 : Defining a Groovy Script for a dynamic query</h6></strong><br>Script Code is named ‘Process Data’ are defined below to construct the dynamic filter for ‘Content Enricher’. The first part of the script parses the Original Message and selects all the key elements using XmlSlurper. The second part forms the key element in the OData $filter format and sets it to property named masterKey.</p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.sap.gateway.ip.core.customdev.util.Message;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">def</span> Message processData(Message message) &#123;</span><br><span class="line"><span class="comment">//Body</span></span><br><span class="line">    <span class="keyword">def</span> body = message.getBody(java.io.Reader);</span><br><span class="line"><span class="comment">//Parse the key from Original message (FIRST PART)</span></span><br><span class="line">    <span class="keyword">def</span> response = <span class="keyword">new</span> XmlSlurper().parse(body);</span><br><span class="line">    <span class="keyword">def</span> keys = response.<span class="string">&#x27;**&#x27;</span>.findAll&#123; node-&gt; node.name() == <span class="string">&#x27;userId&#x27;</span> &#125;*.text();</span><br><span class="line"><span class="comment">//Formulate the filter query. Eg:$filter=userId in&#x27;107&#x27;(SECOND PART)</span></span><br><span class="line">    <span class="keyword">def</span> masterKey = <span class="string">&quot;&#x27;&quot;</span> + keys.unique().join(<span class="string">&quot;&#x27;,&#x27;&quot;</span>) + <span class="string">&quot;&#x27;&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(masterKey == <span class="literal">null</span> || masterKey.trim().isEmpty())&#123;</span><br><span class="line">message.setProperty(<span class="string">&quot;masterKey&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">message.setProperty(<span class="string">&quot;masterKey&quot;</span>, <span class="string">&quot;\$filter=userId in &quot;</span> + masterKey);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">return</span> message;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong><h6>Step 3 : Merging records in the ‘Time Account’ entity that contains obtained user Ids using Content Enricher</h6></strong><br>With the help of content enricher, we will merge related Time Account records to the XML structure containing user ids. For this, we will match the userId field in both XML structures as follows.<br><img src="/sapintegrationdesign/images/cpi6.png" alt="Alt Text"></p>
+<p><strong><h6>Step 3 : Merging records in the ‘Time Account’ entity that contains obtained user Ids using Content Enricher</h6></strong><br>With the help of content enricher, we will merge related Time Account records to the XML structure containing user ids. For this, we will match the userId field in both XML structures as follows.<br><img src="/images/cpi6.png" alt="Alt Text"></p>
 <p>Next, we will define SuccessFactors OData v2 receiver adapter to invoke TimeAccount entity records. Add the property masterKey in the query option.</p>
-<p><img src="/sapintegrationdesign/images/cpi7.png" alt="Alt Text"></p>
+<p><img src="/images/cpi7.png" alt="Alt Text"></p>
 <p>Testing from POSTMAN;</p>
-<p><img src="/sapintegrationdesign/images/cpi8.png" alt="Alt Text"></p>
+<p><img src="/images/cpi8.png" alt="Alt Text"></p>
 
         
     </div>
