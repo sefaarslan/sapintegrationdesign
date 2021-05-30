@@ -15,7 +15,7 @@
 
     <meta charset="utf-8">
     
-    <title>Configuring User Defined Message Search in SAP CPI | SAP Integration Design</title>
+    <title>soon | SAP Integration Design</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
 
@@ -40,7 +40,7 @@
 
 
     <script>
-        window.isPost = true
+        window.isPost = false
         window.aomori = {
             
             gitalk: {
@@ -85,6 +85,8 @@
                     <a class="header-type-title" id="typed" href="/"></a>
                 
 
+                
+                    <span class="header-type-page-title">soon</span>
                 
             </div>
         </div>
@@ -145,153 +147,57 @@
         <div class="main">
             <section class="inner">
                 <section class="inner-main">
-                    <div class="post">
-    <article id="post-ckpbgavyl000ckbllex97djq7" class="article article-type-post" itemscope
-    itemprop="blogPost">
+                    
 
-    <div class="article-inner">
-        
-          
-        
-
-        
-
-        
-        <header class="article-header">
-
-            
+<div class="page">
   
-
-    <h1 class="article-title" itemprop="name">
-      <box-icon name='right-arrow' type='solid' animation='fade-left' color='#3c4859' size="20px" ></box-icon>
-
-      Configuring User Defined Message Search in SAP CPI
-    </h1>
-  
-
-
-
-        </header>
-        
-
-        <div class="article-more-info article-more-info-post hairline">
-
-            <div class="article-date">
-  <time datetime="2021-05-03T10:34:00.000Z" itemprop="datePublished">2021-05-03</time>
+<article
+id="page-ckpbgavyd0005kbll50ng1q4c"
+class="article article-type-page"
+>
+  <div class="article-inner">
+      <div class="article-entry post-inner-html">
+          <section>
+<strong><h4>Contact Us</h4></strong>
+<div>
+  <form accept-charset="UTF-8" action="https://getform.io/f/5581b880-2d45-4aca-add8-2b4fef172260" method="POST" enctype="multipart/form-data" target="_blank">
+    <div class="form-group">
+    <label for="exampleInputEmail1" required="required">Your Email address: </label>
+    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-described by="emailHelp" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+    <label for="exampleInputName">Your Name :</label>
+    <input type="text" name="name" class="form-control" id="exampleInputName" placeholder="Enter your name" required="required">
+    </div>
+    <div class="form-group">
+    <label for="exampleInputName">Your Text:</label>
+    <input type="textarea" name="name" class="form-control" id="exampleInputName" placeholder="Enter your comment" required="required">
+    </div>
+    <div class="form-group">
+    <label for="exampleFormControlSelect1">Text Category :</label>
+    <select class="form-control" id="exampleFormControlSelect1" name="platform" required="required">
+        <option>SAP Cloud Platform Integration</option>
+        <option>SAP Process Integration</option>
+        <option>Others</option>
+    </select>
+    </div>
+    <div class="form-group mt-3">
+    <label class="mr-2">Your Additional File:</label>
+    <input type="file" name="file">
+    </div>
+    <button type="submit" class="btn btn-primary">Send</button>
+</form>
 </div>
-
-
-            
-            <div class="article-category">
-                <a class="article-category-link" href="/categories/SAP-CPI/">SAP-CPI</a>
-            </div>
-            
-
-            
-            <div class="article-tag">
-                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cloud/" rel="tag">cloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpi/" rel="tag">cpi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/integration/" rel="tag">integration</a></li></ul>
-            </div>
-            
-
-
-        </div>
-
-        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
-
-            <p>Generally, it is not easy to uniquely identify a message required for further analysis when there are many messages in the system. The CPI does not have a function such as User Defined Message Search (UDMS) in PI.</p>
-<p>With the help of two standard headers, this feature can be enabled in Integration Flows to define a message based on a unique or key field from the message content.</p>
-<p>We may use the Application Message ID and Application MessageType for our purposes. This is achieved by filling the message header ‘SAP_ApplicationID’ and ‘SAP_MessageType’ with an appropriate value.It is on the developer to think what is the appropriate value to place in the Application Message ID. This may be a unique value sent by the sending system, or possibly a filename in case of file-based integration.</p>
-<h4>How to configure these parameters</h4>
-
-<p>These headers can be populated using the Content Modifier step.</p>
-<p><strong>SAP_ApplicationID</strong>: Populate the key field from the XPath, camel expression or any supported header types in the content modifier.</p>
-<p><strong>SAP_MessageType</strong>: Configure the name of the key field you are capturing in SAP_Application ID.</p>
-<p>For example;<br>Ex: National Id : 12312132312</p>
-<p>SAP_ApplicationID: //nationalId<br>SAP_MessageType: National Id</p>
-<p><img src="/images/cpi1.png" alt="Alt Text"></p>
-<p>The screenshot below shows how to search a message by national Id.</p>
-<p><img src="/images/cpi2.png" alt="Alt Text"></p>
-
-        </div>
-
-    </div>
-
-    
-
-    
-
-    
-
-
-    
-
-    
-
-    
-<nav class="article-nav">
-  
-    <a href="/2021/05/23/SAP-CPI/Invoking-Related-Data-using-Content-Enricher-and-OData-v2-adapters-in-SAP-CPI/" id="article-nav-newer" class="article-nav-link-wrap">
-      <div class="article-nav-caption">Previous Post</div>
-      <div class="article-nav-title">
-        
-          Invoking Related Data using Content Enricher and OData v2 adapters in SAP CPI
-        
+</section>
       </div>
-    </a>
-  
-  
-    <a href="/2021/04/23/SAP-PI-PO/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-caption">Next Post</div>
-      <div class="article-nav-title">Hello World</div>
-    </a>
-  
-</nav>
-
-
-    
-    <div class="article-busuanzi"><box-icon name='book-reader' color='#3c4859' size="15px" ></box-icon><strong> Visitor Count:
-         <span id="busuanzi_value_page_pv">N</span></strong>
-    </div>
-    
-
-
-    <section class="share">
-        <div class="share-title">SHARE</div>
-        <a class="share-item" target="_blank"
-            href="https://twitter.com/share?text=Configuring User Defined Message Search in SAP CPI - SAP Integration Design&url=https://sefaarslan.github.io/sapintegrationdesign/2021/05/03/SAP-CPI/Configuring-User-Defined-Message-Search-in-SAP-CPI/">
-            <box-icon type='logo' name='twitter'></box-icon>
-        </a>
-        <a class="share-item" target="_blank"
-            href="https://www.facebook.com/sharer.php?title=Configuring User Defined Message Search in SAP CPI - SAP Integration Design&u=https://sefaarslan.github.io/sapintegrationdesign/2021/05/03/SAP-CPI/Configuring-User-Defined-Message-Search-in-SAP-CPI/">
-            <box-icon name='facebook-square' type='logo' ></box-icon>
-        </a>
-        <a class="share-item" target="_blank"
-            href="https://www.linkedin.com/shareArticle?mini=true&url=https://sefaarslan.github.io/sapintegrationdesign/2021/05/03/SAP-CPI/Configuring-User-Defined-Message-Search-in-SAP-CPI/">
-            <box-icon name='linkedin-square' type='logo' ></box-icon>
-        </a>
-    </section>
-
+  </div>
 </article>
 
 
 
 
-
-
-<section class="comments">
-    <div id="gitalk-container"></div>
-</section>
-
-
-
-
-
-
-
-<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
 </div>
+
                 </section>
             </section>
 
@@ -314,12 +220,6 @@
 <div class="widget" id="widget">
     
       
-  <div class="widget-wrap">
-    <div class="widget-inner">
-      <div class="toc post-toc-html"></div>
-    </div>
-  </div>
-
     
       
   <div class="widget-wrap widget-cate">
