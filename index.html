@@ -246,78 +246,9 @@ class="article article-type-post"
 
     
         <div class="article-category">
-        <a class="article-category-link" href="/categories/SAP-CPI/">SAP-CPI</a>
+        <a class="article-category-link" href="/categories/SAP-CPI/">SAP CPI</a>
         </div>
     
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-SAP-CPI/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-<box-icon name='right-arrow' type='solid' animation='fade-left' color='#3c4859' size="20px" ></box-icon>
-        <a href="/2021/05/30/SAP-CPI/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI/">Adding Filter Parameters to Request URL using Groovy Script in SAP CPI</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p>We can invoke the data we want according to the structure of the relevant receiver service by filtering through the HTTPS sender adapter over the same url endpoint.Some special https request headers are added to exchange headers for further processing in integration flow.One of these is the CamelHttpQuery header. We will use it to use the filter parameter that we will add to the URL.</p>
-<p>‘CamelHttpQuery : Refers to the query string that is contained in the request URL.In case a receiving adapter is used, this header can be used to dynamically change the URI to be called.’</p>
-<p>Sample Request URL :<br>https://<iflow-tenant URL>/?$filter=<Field Name> eq ‘<Field Value>’<strong>CamelHttpQuery = ?$filter=<Field Name> eq ‘<Field Value>’</strong></p>
-<p><strong><h5>Sample Scenario</h5></strong></p>
-<p><img src="/images/cpi9.png" alt="Alt Text"></p>
-<p>In our scenario, we will call the ‘TimeAccount’ entity over the Success Factors adapter using the filter parameter on the request url. We will edit the ‘CamelHttpQuery’ header with a script. In this way, we will be able to filter on the field we want.</p>
-<p><strong><h5>Configuration Steps</h5></strong></p>
-<p><strong><h6>Step 1 : Defining a Groovy Script for configuring ‘CamelHttpQuery’</strong></h6></p>
-<p>We get the filter from the CamelHttpQuery header and add it to the ‘filterKey’ header. In addition, when we want to call all data without using filtering, since there is no filter value on the address, the ‘filterKey’ header will be defined as empty. In this way, we will be able to invoke all the data over the same request url.</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.sap.gateway.ip.core.customdev.util.Message;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> javax.ws.rs.core.Context;<span class="keyword">def</span> Message processData(Message message) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> body = message.getBody(java.lang.String) <span class="keyword">as</span> String;</span><br><span class="line">    <span class="keyword">def</span> uri = message.getHeaders().get(<span class="string">&quot;CamelHttpQuery&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(uri != <span class="literal">null</span> &amp;&amp; !uri.isEmpty())&#123;</span><br><span class="line">        message.setHeader(<span class="string">&quot;filterKey&quot;</span>,uri);</span><br><span class="line">        message.setBody(body);</span><br><span class="line">        <span class="keyword">return</span> message;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        message.setHeader(<span class="string">&quot;filterKey&quot;</span>,<span class="string">&quot;&quot;</span>);</span><br><span class="line">        message.setBody(body);</span><br><span class="line">        <span class="keyword">return</span> message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong><h6>Step 2 : Configuring Receiver Success Factors Adapter</strong></h6></p>
-<p>In this section, in the Proccesing tab/Query Options section ,we add the ‘filterKey’ header that we defined in the script to the filter section.</p>
-<p><img src="/images/cpi10.png" alt="Alt Text"></p>
-<p><strong><h6>Testing from POSTMAN;</strong></h6></p>
-<p><img src="/images/cpi11.png" alt="Alt Text"></p>
-
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-05-30T16:28:00.000Z" itemprop="datePublished">2021-05-30</time>
-</div>
-
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/SAP-CPI/">SAP-CPI</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cloud/" rel="tag">cloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpi/" rel="tag">cpi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/platform/" rel="tag">platform</a></li></ul>
-        </div>
     
     </div>
 </footer>
@@ -383,12 +314,81 @@ class="article article-type-post"
 
     
         <div class="article-category">
-        <a class="article-category-link" href="/categories/SAP-CPI/">SAP-CPI</a>
+        <a class="article-category-link" href="/categories/SAP-CPI/">SAP CPI</a>
         </div>
     
     
         <div class="article-tag">
         <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cloud/" rel="tag">cloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpi/" rel="tag">cpi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/integration/" rel="tag">integration</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-SAP-CPI/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+<box-icon name='right-arrow' type='solid' animation='fade-left' color='#3c4859' size="20px" ></box-icon>
+        <a href="/2021/05/03/SAP-CPI/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI/">Adding Filter Parameters to Request URL using Groovy Script in SAP CPI</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <p>We can invoke the data we want according to the structure of the relevant receiver service by filtering through the HTTPS sender adapter over the same url endpoint.Some special https request headers are added to exchange headers for further processing in integration flow.One of these is the CamelHttpQuery header. We will use it to use the filter parameter that we will add to the URL.</p>
+<p>‘CamelHttpQuery : Refers to the query string that is contained in the request URL.In case a receiving adapter is used, this header can be used to dynamically change the URI to be called.’</p>
+<p>Sample Request URL :<br>https://<iflow-tenant URL>/?$filter=<Field Name> eq ‘<Field Value>’<strong>CamelHttpQuery = ?$filter=<Field Name> eq ‘<Field Value>’</strong></p>
+<p><strong><h5>Sample Scenario</h5></strong></p>
+<p><img src="/images/cpi9.png" alt="Alt Text"></p>
+<p>In our scenario, we will call the ‘TimeAccount’ entity over the Success Factors adapter using the filter parameter on the request url. We will edit the ‘CamelHttpQuery’ header with a script. In this way, we will be able to filter on the field we want.</p>
+<p><strong><h5>Configuration Steps</h5></strong></p>
+<p><strong><h6>Step 1 : Defining a Groovy Script for configuring ‘CamelHttpQuery’</strong></h6></p>
+<p>We get the filter from the CamelHttpQuery header and add it to the ‘filterKey’ header. In addition, when we want to call all data without using filtering, since there is no filter value on the address, the ‘filterKey’ header will be defined as empty. In this way, we will be able to invoke all the data over the same request url.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.sap.gateway.ip.core.customdev.util.Message;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> javax.ws.rs.core.Context;<span class="keyword">def</span> Message processData(Message message) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> body = message.getBody(java.lang.String) <span class="keyword">as</span> String;</span><br><span class="line">    <span class="keyword">def</span> uri = message.getHeaders().get(<span class="string">&quot;CamelHttpQuery&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(uri != <span class="literal">null</span> &amp;&amp; !uri.isEmpty())&#123;</span><br><span class="line">        message.setHeader(<span class="string">&quot;filterKey&quot;</span>,uri);</span><br><span class="line">        message.setBody(body);</span><br><span class="line">        <span class="keyword">return</span> message;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        message.setHeader(<span class="string">&quot;filterKey&quot;</span>,<span class="string">&quot;&quot;</span>);</span><br><span class="line">        message.setBody(body);</span><br><span class="line">        <span class="keyword">return</span> message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><h6>Step 2 : Configuring Receiver Success Factors Adapter</strong></h6></p>
+<p>In this section, in the Proccesing tab/Query Options section ,we add the ‘filterKey’ header that we defined in the script to the filter section.</p>
+<p><img src="/images/cpi10.png" alt="Alt Text"></p>
+<p><strong><h6>Testing from POSTMAN;</strong></h6></p>
+<p><img src="/images/cpi11.png" alt="Alt Text"></p>
+
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-05-03T16:28:00.000Z" itemprop="datePublished">2021-05-03</time>
+</div>
+
+    
+        <div class="article-category">
+        <a class="article-category-link" href="/categories/SAP-CPI/">SAP CPI</a>
+        </div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cloud/" rel="tag">cloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpi/" rel="tag">cpi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/platform/" rel="tag">platform</a></li></ul>
         </div>
     
     </div>
@@ -449,7 +449,7 @@ class="article article-type-post"
 
     
         <div class="article-category">
-        <a class="article-category-link" href="/categories/SAP-CPI/">SAP-CPI</a>
+        <a class="article-category-link" href="/categories/SAP-CPI/">SAP CPI</a>
         </div>
     
     
@@ -495,7 +495,7 @@ class="article article-type-post"
   <div class="widget-wrap widget-cate">
     <div class="widget-title"><span>Categories</span></div>
     <div class="widget-inner">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/SAP-PI-PO/">SAP PI/PO</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SAP-CPI/">SAP-CPI</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/SAP-CPI/">SAP CPI</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SAP-PI-PO/">SAP PI/PO</a></li></ul>
     </div>
   </div>
 
@@ -522,11 +522,11 @@ class="article article-type-post"
           </li>
         
           <li>
-            <a href="/2021/05/30/SAP-CPI/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI/">Adding Filter Parameters to Request URL using Groovy Script in SAP CPI</a>
+            <a href="/2021/05/23/SAP-CPI/Invoking-Related-Data-using-Content-Enricher-and-OData-v2-adapters-in-SAP-CPI/">Invoking Related Data using Content Enricher and OData v2 adapters in SAP CPI</a>
           </li>
         
           <li>
-            <a href="/2021/05/23/SAP-CPI/Invoking-Related-Data-using-Content-Enricher-and-OData-v2-adapters-in-SAP-CPI/">Invoking Related Data using Content Enricher and OData v2 adapters in SAP CPI</a>
+            <a href="/2021/05/03/SAP-CPI/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI/">Adding Filter Parameters to Request URL using Groovy Script in SAP CPI</a>
           </li>
         
           <li>
