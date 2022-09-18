@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZXK90P93EF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-ZXK90P93EF');
+  </script>
+
+
+    <meta charset="utf-8">
+    
+    <title>Collecting a field from different OData Service and Use it to SuccessFactor Query in SAP CPI | SAP Integration Design</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+
+    
+        <meta property="algolia:search" data-application-id="67IWBPGSH1" data-api-key="04eba6dc43d3f0c561919d5393d07129" data-index-name="prod_sapintegrationdesign">
+    
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1618369575286.css">
+
+
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            gitalk: {
+                enable: true,
+                clientID: "2788e1b4fc15f4d872fd",
+                clientSecret: "c070b2ebeb3306b6fad29a03802461d493937934",
+                repo: "sapintegrationdesign",
+                owner: "sefaarslan",
+                admin: ["sefaarslan",],
+                distractionFreeMode: true // Facebook-like distraction free mode  // Facebook-like distraction free mode
+            },
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = true
+
+
+    </script>
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+              <img src="https://sapintegrationdesign.com/images/sidlogo.png" alt="Sefa">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>SAP Integration Design</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">Home</a>
+                
+                <a href="/About">About</a>
+                
+                <a href="/archives">Archives</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://www.linkedin.com/in/sefa-arslan/">
+        <box-icon type='logo' name='linkedin-square'></box-icon>
+    </a>
+
+    <a class="social" target="_blank" href="">
+        <box-icon type='' name=''></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">Home</a>
+                    
+                    <a href="/About">About</a>
+                    
+                    <a href="/archives">Archives</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-cl876fatk0003otllc6bc94lq" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+        
+          
+        
+
+        
+
+        
+        <header class="article-header">
+
+            
+  
+
+    <h1 class="article-title" itemprop="name">
+      <box-icon name='right-arrow' type='solid' animation='fade-left' color='#3c4859' size="20px" ></box-icon>
+
+      Collecting a field from different OData Service and Use it to SuccessFactor Query in SAP CPI
+    </h1>
+  
+
+
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2021-05-30T16:43:10.000Z" itemprop="datePublished">2021-05-30</time>
+</div>
+
+
+            
+            <div class="article-category">
+                <a class="article-category-link" href="/categories/SAP-CPI/">SAP-CPI</a>
+            </div>
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cloud/" rel="tag">cloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpi/" rel="tag">cpi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/integration/" rel="tag">integration</a></li></ul>
+            </div>
+            
+
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+
+            <p><img src="/images/cpi12.png" alt="Alt Text"></p>
+<p>In this blog, we will explain how to develop need to pick all the userId fields from Odatav2 service and combine all then pass it to the query at the receiver channel.</p>
+<p>Accordingly, we will use property and OData v2 $filter query option. In this example, we will be using EmpJob entity and TimeAccount entity in Successfactors OData v2 adapter.We will ensure that the userId values in the Empjob entity are taken and used in the TimeAccount entity.</p>
+<p>Firstly, ‘Request Reply’ is defined that is named ‘Call EmpJob Entity’ in the flow, SuccessFactors OData v2 adapter configurations are made as shown below. Thanks to this ,we have access to User Id records of company.</p>
+<p><img src="/images/cpi13.png" alt="Alt Text"></p>
+<p>Script Code is named ‘Process Data’ are defined below to setting filters.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.sap.gateway.ip.core.customdev.util.Message;</span><br><span class="line"><span class="keyword">import</span> groovy.json.*;</span><br><span class="line"><span class="keyword">import</span> groovy.util.logging.*;</span><br><span class="line"><span class="keyword">import</span> com.sap.gateway.ip.core.customdev.util.Message;</span><br><span class="line"><span class="keyword">import</span> org.codehaus.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> Message processData(Message message)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">def</span> body = message.getBody(java.lang.String) <span class="keyword">as</span> String;</span><br><span class="line"> <span class="keyword">def</span> XmlDataObject = <span class="keyword">new</span> XmlSlurper().parseText(body)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> data = []</span><br><span class="line">    <span class="keyword">def</span> s=<span class="string">&quot;&quot;</span>;</span><br><span class="line">    XmlDataObject.<span class="string">&#x27;**&#x27;</span>.findAll &#123; it.name()== <span class="string">&#x27;userId&#x27;</span>&#125;.each &#123; a -&gt;</span><br><span class="line">    data &lt;&lt; a.text() &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Removed duplicates</span></span><br><span class="line"></span><br><span class="line">    data.unique()   </span><br><span class="line">    <span class="keyword">def</span> last = data.last()</span><br><span class="line"></span><br><span class="line"><span class="comment">//Need to find the last value to remove &quot;or&quot; from it</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i <span class="keyword">in</span> data)&#123;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (last == i)&#123;</span><br><span class="line"></span><br><span class="line">          s= s.concat(<span class="string">&quot;(userId eq $&#123;i&#125;) &quot;</span>);</span><br><span class="line">          message.setProperty(<span class="string">&quot;filterKey&quot;</span>, <span class="string">&quot;\$filter=&quot;</span> + s);</span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line">       <span class="keyword">else</span>&#123;</span><br><span class="line">             s= s.concat(<span class="string">&quot;(userId eq $&#123;i&#125;) or &quot;</span>);</span><br><span class="line">          message.setProperty(<span class="string">&quot;filterKey&quot;</span>, <span class="string">&quot;\$filter=&quot;</span> + s);</span><br><span class="line">           &#125;</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> message;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example Output Property Value: </strong><br><br><strong>Name :</strong> filterKey <br><br><strong>Value :</strong> $filter=(userId eq 99999999) or (userId eq 20000054) or (userId eq 10928) or (userId eq 30000027) or (userId eq 9299) or (userId eq 1421) or (userId eq 8122) or (userId eq 139) or (userId eq 69) or (userId eq 40002) or (userId eq 40001) or (userId eq 8450) or (userId eq 31) or (userId eq 8363) or (userId eq 149)</p>
+<p>Finally, ‘Request Reply’ is defined that is named ‘Call TimeAccount Entity’ in the flow, SuccessFactors OData v2 adapter configurations are made as shown below.Add the property filterKey in the query option.</p>
+<p><img src="/images/cpi14.png" alt="Alt Text"></p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+  
+    <a href="/2021/05/23/SAP-CPI/Invoking-Related-Data-using-Content-Enricher-and-OData-v2-adapters-in-SAP-CPI/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">Next Post</div>
+      <div class="article-nav-title">Invoking Related Data using Content Enricher and OData v2 adapters in SAP CPI</div>
+    </a>
+  
+</nav>
+
+
+    
+    <div class="article-busuanzi"><box-icon name='book-reader' color='#3c4859' size="15px" ></box-icon><strong> Visitor Count:
+         <span id="busuanzi_value_page_pv">N</span></strong>
+    </div>
+    
+
+
+    <section class="share">
+        <div class="share-title">SHARE</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=Collecting a field from different OData Service and Use it to SuccessFactor Query in SAP CPI - SAP Integration Design&url=https://sefaarslan.github.io/sapintegrationdesign/2021/05/30/SAP-CPI/Collecting-a-field-from-different-OData-Service-and-Use-it-to-SuccessFactor-Query-in-SAP-CPI/">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=Collecting a field from different OData Service and Use it to SuccessFactor Query in SAP CPI - SAP Integration Design&u=https://sefaarslan.github.io/sapintegrationdesign/2021/05/30/SAP-CPI/Collecting-a-field-from-different-OData-Service-and-Use-it-to-SuccessFactor-Query-in-SAP-CPI/">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.linkedin.com/shareArticle?mini=true&url=https://sefaarslan.github.io/sapintegrationdesign/2021/05/30/SAP-CPI/Collecting-a-field-from-different-OData-Service-and-Use-it-to-SuccessFactor-Query-in-SAP-CPI/">
+            <box-icon name='linkedin-square' type='logo' ></box-icon>
+        </a>
+    </section>
+
+</article>
+
+
+
+
+
+
+<section class="comments">
+    <div id="gitalk-container"></div>
+</section>
+
+
+
+
+
+
+
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar sidebar-search-fix">
+            
+                
+
+    <div class="search">
+    <div class="has-icon-right">
+        <input type="text" class="form-input" id="search" placeholder="SEARCH" autocomplete="off">
+        <div class="form-icon">
+            <box-icon name='search' color="#3c4859"></box-icon>
+        </div>
+    </div>
+    <div class="search-result" id="search-ps"></div>
+</div>
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap">
+    <div class="widget-inner">
+      <div class="toc post-toc-html"></div>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-cate">
+    <div class="widget-title"><span>Categories</span></div>
+    <div class="widget-inner">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/SAP-PI-PO/">SAP PI/PO</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/SAP-CPI/">SAP-CPI</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/cloud/" rel="tag">cloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cpi/" rel="tag">cpi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/integration/" rel="tag">integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/platform/" rel="tag">platform</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sap/" rel="tag">sap</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/30/SAP-CPI/Collecting-a-field-from-different-OData-Service-and-Use-it-to-SuccessFactor-Query-in-SAP-CPI/">Collecting a field from different OData Service and Use it to SuccessFactor Query in SAP CPI</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/23/SAP-CPI/Invoking-Related-Data-using-Content-Enricher-and-OData-v2-adapters-in-SAP-CPI/">Invoking Related Data using Content Enricher and OData v2 adapters in SAP CPI</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/03/SAP-CPI/Adding-Filter-Parameters-to-Request-URL-using-Groovy-Script-in-SAP-CPI/">Adding Filter Parameters to Request URL using Groovy Script in SAP CPI</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/03/SAP-CPI/Configuring-User-Defined-Message-Search-in-SAP-CPI/">Configuring User Defined Message Search in SAP CPI</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/01/SAP-PI-PO/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">2021</a></li></ul>
+        </div>
+  <div class="widget-wrap widget-cate">
+          <div class="widget-title"><span>Others</span></div>
+      <div class="widget-inner">
+      <box-icon name='send' flip='vertical' size="xs" animation='tada' color='#3c4859' ></box-icon><a href="/contact/"<a> Contact Us</a>
+    </div>
+
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <div class="footer-wrap">
+        <div class="footer-inner">
+            SAP Integration Design &copy; 2022<br>
+            Powered By Hexo · Theme By <a href="https://sapintegrationdesign.com/" target="_blank">Aomori</a> · Developed by Sefa Arslan
+        </div>
+    </div>
+
+</footer>
+
+
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+
+
+
+
+<script src="/dist/build.js?1618369575286.js"></script>
+
+
+<script src="/dist/custom.js?1618369575286.js"></script>
+
+
+
+<!-- 百度链接提交 -->
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+</body>
+
+</html>
